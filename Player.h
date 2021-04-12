@@ -1,6 +1,6 @@
 //siti julekhah 4210191026
 #include<conio.h>
-
+#pragma once
 class Player
 {
 private:

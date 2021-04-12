@@ -1,26 +1,25 @@
 //bismillah 
 #include"Board.h"
 
-
 //mukrom karunia azza 4210191028
 void Board::randomizeArena()
 {
-	int repeat = 0;
-	while (repeat < 10)
+	int r;
+	string cek;
+	srand(time(0));
+	for (int t = 0; t < 1; t++)
 	{
-		int r;
-		int* i = new int;
-		srand(int(i));
-		delete i;
-		r = rand() % 10;
-		string cek = to_string(r);
 		for (int i = 0; i < boxArena; i++)
 		{
 			for (int j = 0; j < boxArena; j++)
 			{
+				r = rand() % 10;
+				cek = to_string(r);
 				if (arena[i][j] == cek)
+				{
 					arena[i][j] = "_";
-				repeat++;
+					break;
+				}
 			}
 		}
 	}

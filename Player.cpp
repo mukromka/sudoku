@@ -1,5 +1,5 @@
 #include"Player.h"
-
+//siti julekhah 4210191026
 char Player::getinput()
 {
 	char theInput = 'x';
