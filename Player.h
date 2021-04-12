@@ -1,14 +1,12 @@
-//siti julekhah 4210191026 (masih belum, nungguin boardnya dlu)
-#include<iostream>
+//siti julekhah 4210191026
 #include<conio.h>
-using namespace std;
 
 class Player
 {
-private :
+private:
 	int cursorpositionX;
 	int cursorpositionY;
-
+	int answer = 0;
 public:
 
 	Player()
@@ -46,4 +44,9 @@ public:
 	}
 	bool moveplayer();
 	char getinput();
+	void setanswer(int ans);
+	int getanswer()
+	{
+		return answer;
+	}
 };

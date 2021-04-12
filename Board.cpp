@@ -19,13 +19,21 @@ void Board::randomizeArena()
 			for (int j = 0; j < boxArena; j++)
 			{
 				if (arena[i][j] == cek)
-					arena[i][j] = " ";
+					arena[i][j] = "_";
 				repeat++;
 			}
 		}
 	}
-	
+}
 
+void Board::setArena(int x, int y,int value)
+{
+	if (value > 0 && value < 10)
+	{
+		if (arena[y][x] == "_")
+			arena[y][x] = to_string(value);
+	}
+	value = 0;
 }
 void Board::importArena()
 {
@@ -48,6 +56,7 @@ void Board::importArena()
 		for (int j = 0; j < boxArena; j++)
 		{
 			arena[i][j] = temp.substr(dataTaken, 1);
+			check[i][j] = temp.substr(dataTaken, 1);
 			dataTaken++;
 		}
 	}
@@ -88,24 +97,5 @@ void Board::drawArena(int x,int y)
 		}
 		else
 			cout << endl << endl;
-
-	}
-}
-
-int main()
-{
-	Board board;
-	Player player;
-	bool isMove = false;
-	bool gameOver = false;
-	board.importArena();
-	board.randomizeArena();
-	board.drawArena(player.getpositionX(), player.getpositionY());
-	while (!gameOver)
-	{
-		isMove = player.moveplayer();
-		if (isMove)
-			board.drawArena(player.getpositionX(),player.getpositionY());
-		//gameOver = true;
 	}
 }
