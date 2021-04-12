@@ -1,12 +1,7 @@
 //bismillah 
-#include<iostream>
-#include<fstream>
-#include<string>
 #include"Board.h"
-#include"Player.h"
-#include<time.h>
-#define boxArena 9
-using namespace std;
+
+
 //mukrom karunia azza 4210191028
 void Board::randomizeArena()
 {
@@ -58,26 +53,38 @@ void Board::importArena()
 	}
 
 }
-void Board::drawArena()
+
+
+void Board::drawArena(int x,int y)
 {
+	system("cls");
 	for (int i = 0; i < boxArena; i++)
 	{
 		for (int j = 0; j < boxArena; j++)
 		{
 			if (j > 0) {
 				if (j == 3 || j == 6)
-					cout << " | ";
+					cout << "| ";
 				else
-					cout << "   ";
+					cout << "  ";
 			}
 			else {
 				cout << "   ";
 			}
 			cout << arena[i][j];
 		}
+		cout << endl << "  ";
+		for (int j = 0; j < boxArena; j++)
+		{
+			if (x == j && y == i)
+				cout << " ^ ";
+			else
+				cout << "   ";
+		}
+
 		if (i == 2 || i == 5)
 		{
-			cout << "\n  ___ ___ ___ ___ ___ ___ ___ ___ ___ " << endl;
+			cout << "\n  ___ ___ ___ ___ ___ ___ ___ " << endl;
 		}
 		else
 			cout << endl << endl;
@@ -88,7 +95,17 @@ void Board::drawArena()
 int main()
 {
 	Board board;
+	Player player;
+	bool isMove = false;
+	bool gameOver = false;
 	board.importArena();
 	board.randomizeArena();
-	board.drawArena();
+	board.drawArena(player.getpositionX(), player.getpositionY());
+	while (!gameOver)
+	{
+		isMove = player.moveplayer();
+		if (isMove)
+			board.drawArena(player.getpositionX(),player.getpositionY());
+		//gameOver = true;
+	}
 }
