@@ -1,7 +1,6 @@
 //mukrom karunia azza 4210191028
 #include"GameManager.h"
-Board board;
-Player player;
+
 bool gameManager::checkAnswer(bool isOver)
 {
 	isOver = false;
@@ -9,7 +8,7 @@ bool gameManager::checkAnswer(bool isOver)
 	{
 		for (int j = 0; j < boxArena; j++)
 		{
-			if (board.getArena(i, j) == board.getCheck(i, j))
+			if (b->getArena(i, j) == b->getCheck(i, j))
 			{
 				checktrue++;
 			}
@@ -30,17 +29,20 @@ void gameManager::startGame()
 {
 	bool isMove = false;
 	bool gameOver = false;
-	board.importArena();
-	board.randomizeArena();
-	board.drawArena(player.getpositionX(), player.getpositionY());
+	b->importArena();
+	b->randomizeArena();
+	b->drawArena(p->getpositionX(), p->getpositionY());
 	while (!gameOver)
 	{
-		isMove = player.moveplayer();
+		isMove = p->moveplayer();
 		if (isMove)
 		{
-			board.setArena(player.getpositionX(), player.getpositionY(), player.getanswer());
-			board.drawArena(player.getpositionX(), player.getpositionY());
-			player.setanswer(0);
+			FillArena* command = new FillArena(*b, p->getpositionX(), p->getpositionY(), p->getanswer());
+			command->excecute();
+			inv->pushCommand(*command);
+			//board.fillArena(player.getpositionX(), player.getpositionY(), player.getanswer());
+			b->drawArena(p->getpositionX(), p->getpositionY());
+			p->setanswer(0);
 			gameOver = checkAnswer(gameOver);
 		}
 	}

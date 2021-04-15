@@ -1,6 +1,9 @@
 //bismillah 
 #include"Board.h"
-
+#include <windows.h> 
+#define mudah 1
+#define normal 10
+#define expert 25
 //mukrom karunia azza 4210191028
 void Board::randomizeArena()
 {
@@ -25,13 +28,15 @@ void Board::randomizeArena()
 	}
 }
 
-void Board::setArena(int x, int y,int value)
+void Board::fillArena(int x, int y,int value)
 {
 	if (value > 0 && value < 10)
 	{
 		if (arena[y][x] == "_")
 			arena[y][x] = to_string(value);
 	}
+	else if (value == 0)
+		arena[y][x] = "_";
 	value = 0;
 }
 void Board::importArena()
@@ -66,6 +71,7 @@ void Board::importArena()
 void Board::drawArena(int x,int y)
 {
 	system("cls");
+	cout << endl;
 	for (int i = 0; i < boxArena; i++)
 	{
 		for (int j = 0; j < boxArena; j++)
@@ -90,11 +96,15 @@ void Board::drawArena(int x,int y)
 				cout << "   ";
 		}
 
-		if (i == 2 || i == 5)
+		if (i == 2)
 		{
-			cout << "\n  ___ ___ ___ ___ ___ ___ ___ " << endl;
+			cout << "\n  ___ ___ ___ ___ ___ ___ ___ " << "\t" << "Press W/A/S/D to move";
+		}
+		if (i == 5)
+		{
+			cout << "\n  ___ ___ ___ ___ ___ ___ ___ " << "\t" << "Press Z to Undo, Press Y to Redo" << endl;;
 		}
 		else
-			cout << endl << endl;
+			cout << endl ;
 	}
 }

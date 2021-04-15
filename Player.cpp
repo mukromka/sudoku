@@ -85,6 +85,11 @@ bool Player::moveplayer()
 		setanswer(9);
 		isMove = true;
 	}
+	else if (input == 'Z'|| input == 'z')
+	{
+		GM->undo();
+		isMove = true;
+	}
 	else
 		isMove = false;
 

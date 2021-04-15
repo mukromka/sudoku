@@ -3,7 +3,6 @@
 #include<iostream>
 #include<fstream>
 #include<time.h>
-#include"Player.h"
 #define boxArena 9
 #pragma once
 
@@ -15,11 +14,11 @@ private:
 	string arena[9][9];
 	string check[9][9];
 public:
-	Player theplayer;
+	
 	void drawArena(int x,int y);
 	void importArena();
 	void randomizeArena();
-	void setArena(int x, int y,int value);
+	void fillArena(int x, int y,int value);
 	string getArena(int i, int j)
 	{
 		return arena[i][j];
