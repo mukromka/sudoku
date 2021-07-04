@@ -11,10 +11,11 @@ class Board
 {
 private:
 	string temp;
+	string temp2;
 	string arena[9][9];
 	string check[9][9];
 public:
-	
+	void resetLevel();
 	void drawArena(int x,int y);
 	void importArena();
 	void randomizeArena();

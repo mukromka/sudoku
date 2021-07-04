@@ -1,5 +1,6 @@
 #include"Player.h"
 //siti julekhah 4210191026
+
 char Player::getinput()
 {
 	char theInput = 'x';
@@ -85,9 +86,19 @@ bool Player::moveplayer()
 		setanswer(9);
 		isMove = true;
 	}
-	else if (input == 'Z'|| input == 'z')
+	else if (input == 'Z' || input == 'z')
 	{
-		GM->undo();
+		setanswer(10);//undo move
+		isMove = true;
+	}
+	else if (input == 'Y' || input == 'y')
+	{
+		setanswer(11);//redo move
+		isMove = true;
+	}
+	else if (input == 'R' || input == 'r')
+	{
+		setanswer(12);//redo move
 		isMove = true;
 	}
 	else

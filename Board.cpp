@@ -10,18 +10,21 @@ void Board::randomizeArena()
 	int r;
 	string cek;
 	srand(time(0));
-	for (int t = 0; t < 1; t++)
+	if (temp2.size() <= 0)
 	{
-		for (int i = 0; i < boxArena; i++)
+		for (int t = 0; t < 1; t++)
 		{
-			for (int j = 0; j < boxArena; j++)
+			for (int i = 0; i < boxArena; i++)
 			{
-				r = rand() % 10;
-				cek = to_string(r);
-				if (arena[i][j] == cek)
+				for (int j = 0; j < boxArena; j++)
 				{
-					arena[i][j] = "_";
-					break;
+					r = rand() % 10;
+					cek = to_string(r);
+					if (arena[i][j] == cek)
+					{
+						arena[i][j] = "_";
+						break;
+					}
 				}
 			}
 		}
@@ -38,35 +41,83 @@ void Board::fillArena(int x, int y,int value)
 	else if (value == 0)
 		arena[y][x] = "_";
 	value = 0;
+	ofstream foutput;
+	ifstream finput;
+	finput.open("SaveBoard.txt");
+	foutput.open("SaveBoard.txt");
+
+	if (finput.is_open())
+	{
+		for (int i = 0; i < boxArena; i++)
+		{
+			for (int j = 0; j < boxArena; j++)
+			{
+				foutput << arena[i][j];
+			}
+		}
+	}
+	finput.close();
+	foutput.close();
 }
 void Board::importArena()
 {
+
 	ifstream jawaban("kunci_jawaban.txt");
-	if (jawaban.is_open())
-	{
-		int i = 0;
-		while (!jawaban.eof())
+		if (jawaban.is_open())
 		{
-			getline(jawaban, temp);
-			i++;
+			while (!jawaban.eof())
+			{
+				getline(jawaban, temp);
+			}
+			jawaban.close();
 		}
-		jawaban.close();
-	}
-	else
-		cout << "File error!";
+		ifstream saveBoard("SaveBoard.txt");
+		if (saveBoard.is_open())
+		{
+			while (!saveBoard.eof())
+			{
+				getline(saveBoard, temp2);
+
+			}
+		}
+		else
+			cout << "File error!";
 	int dataTaken = 0;
 	for (int i = 0; i < boxArena; i++)
 	{
 		for (int j = 0; j < boxArena; j++)
 		{
-			arena[i][j] = temp.substr(dataTaken, 1);
-			check[i][j] = temp.substr(dataTaken, 1);
-			dataTaken++;
+			if (temp2.size() <=0)
+			{
+				arena[i][j] = temp.substr(dataTaken, 1);
+				check[i][j] = temp.substr(dataTaken, 1);
+				dataTaken++;
+			}
+			else
+			{
+				arena[i][j] = temp2.substr(dataTaken, 1);
+				dataTaken++;
+			}
 		}
 	}
 
+
 }
 
+void Board::resetLevel()
+{
+	ofstream foutput;
+	ifstream finput;
+	finput.open("SaveBoard.txt");
+	foutput.open("SaveBoard.txt");
+
+	if (finput.is_open())
+	{
+		foutput << "";
+	}
+	finput.close();
+	foutput.close();
+}
 
 void Board::drawArena(int x,int y)
 {

@@ -14,15 +14,16 @@ private :
 	Player* p;
 	Invoker* inv;
 public :
-	gameManager()
-	{
-		p = new Player();
-		b = new Board();
-		inv = new Invoker();
-	}
+	gameManager();
 	void startGame();
 	bool checkAnswer(bool gameOver);
 };
+gameManager::gameManager()
+{
+	p = new Player();
+	b = new Board();
+	inv = new Invoker();
+}
 
 bool gameManager::checkAnswer(bool isOver)
 {
@@ -42,6 +43,7 @@ bool gameManager::checkAnswer(bool isOver)
 		system("cls");
 		cout << "\n\n\n\n\n\t\tYou Win!\n\n\n" << endl;
 		isOver = true;
+		b->resetLevel();
 	}
 	else
 		checktrue = 0;
@@ -60,7 +62,7 @@ void gameManager::startGame()
 		isMove = p->moveplayer();
 		if (isMove)
 		{
-			if (p->getanswer() != 0 && p->getanswer() < 9)
+			if (p->getanswer() != 0 && p->getanswer() < 10)
 			{
 				FillArena* command = new FillArena(*b, p->getpositionX(), p->getpositionY(), p->getanswer());
 				command->excecute();
@@ -70,7 +72,13 @@ void gameManager::startGame()
 				inv->popCommandUndo(); // undo move
 			else if (p->getanswer() == 11)//means press y
 				inv->popCommandRedo();//redo move
-
+			else if (p->getanswer() == 12)
+			{
+				b->resetLevel();
+				system("cls");
+				b->importArena();
+				b->randomizeArena();
+			}
 			b->drawArena(p->getpositionX(), p->getpositionY());
 			p->setanswer(0);
 			gameOver = checkAnswer(gameOver);
